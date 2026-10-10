@@ -1,0 +1,133 @@
+{
+    "total_dataset_samples": 6335,
+    "train_samples": 5068,
+    "test_samples": 1267,
+    "tfidf_features": 10000,
+    "best_model": "SVM",
+    "models": {
+        "SVM": {
+            "key": "SVM",
+            "name": "Support Vector Machine (Linear)",
+            "model_file": "models/svm.joblib",
+            "train_time_sec": 0.87,
+            "accuracy": 0.9511,
+            "precision": 0.9468,
+            "recall": 0.9558,
+            "f1_score": 0.9513,
+            "confusion_matrix": {
+                "matrix": [
+                    [
+                        600,
+                        34
+                    ],
+                    [
+                        28,
+                        605
+                    ]
+                ],
+                "tn": 600,
+                "fp": 34,
+                "fn": 28,
+                "tp": 605
+            },
+            "test_samples": 1267
+        },
+        "Random Forest": {
+            "key": "Random Forest",
+            "name": "Random Forest Classifier",
+            "model_file": "models/random_forest.joblib",
+            "train_time_sec": 6.13,
+            "accuracy": 0.9077,
+            "precision": 0.8897,
+            "recall": 0.9305,
+            "f1_score": 0.9097,
+            "confusion_matrix": {
+                "matrix": [
+                    [
+                        561,
+                        73
+                    ],
+                    [
+                        44,
+                        589
+                    ]
+                ],
+                "tn": 561,
+                "fp": 73,
+                "fn": 44,
+                "tp": 589
+            },
+            "test_samples": 1267
+        },
+        "XGBoost": {
+            "key": "XGBoost",
+            "name": "XGBoost Classifier",
+            "model_file": "models/xgboost.joblib",
+            "train_time_sec": 159.89,
+            "accuracy": 0.9305,
+            "precision": 0.9212,
+            "recall": 0.9415,
+            "f1_score": 0.9313,
+            "confusion_matrix": {
+                "matrix": [
+                    [
+                        583,
+                        51
+                    ],
+                    [
+                        37,
+                        596
+                    ]
+                ],
+                "tn": 583,
+                "fp": 51,
+                "fn": 37,
+                "tp": 596
+            },
+            "test_samples": 1267
+        }
+    },
+    "sample_articles": [
+        {
+            "title": "Meet the Neocons, 9/11 Criminals and Goldman Bankers On Team Trump : The Corbett Report",
+            "text": "Corbett \u2022 11/12/2016 \u2022 20 Comments \nThe voting machines have decided who will be the next puppet figurehead of the Pax Americana deep state for the next four years. The circus is over and the peanut shells are being swept out of the stands. So what do we have to show for all of it? \nWell, I have some good news, some bad news, and some not-so-good news for you. Let\u2019s start with the bad news. \nApparently some people voted for Trump in the belief that he was some sort of anti-establishment truth-telling hero of the working class. I hate to be the one to disabuse you of this notion, so let\u2019s just look at his transition team, his campaign team, the people who have already been tapped to be part of the new administration and the people who are being contacted for potential cabinet appointments. Warning: It\u2019s not a pretty picture. \nFor free access to this editorial, please CLICK HERE . \nFor full access to the subscriber newsletter, and to support this website, please become a member . Only site members can access this content. \nAlready a Member?",
+            "ground_truth": "FAKE NEWS"
+        },
+        {
+            "title": "From Berkeley to Kent State",
+            "text": "GaryNorth.com November 1, 2016 \nHere is a video of a recent protest at the University of California, Berkeley, the nation\u2019s most academically prestigious tax-funded university. It is the premier state school today. It was in 1964. It was in 1880. \nThis is not a threat to the social order. It is an annoyance for students who want to go to class. \nWHERE AND WHEN THE SIXTIES BEGAN \nOn September 10, 1964, the Free Speech Movement began at Berkeley. Almost no one remembers why. \nThe University\u2019s Board of Regents had long imposed restrictions on what kinds of recruiting were possible on school property. Everyone involved in student government knew the rules. Every group had to be approved: fraternities, sororities, religious groups, and political activists. The underlying motivation, more than anything, was to restrict religious proselytizing: the church/state separation issue. \nThere were almost no conservative political groups on any of the six campuses (San Diego was opening with under 200 undergraduates that semester). As an undergraduate, I was probably the hardest core right-winger in any of the student governments on the five campuses. I had been involved in student government. I had been president of the sophomore class (1960) and president of the Associated Men Students (1961). I was part of an elite group of campus leaders called the California Club. The president of the University, Clark Kerr, met with us once year. \nIn the fall of 1964, a 26-foot strip of land close to ",
+            "ground_truth": "FAKE NEWS"
+        },
+        {
+            "title": "Packer to lose more money as Carey wants back-out fee",
+            "text": "Saturday, 12 November 2016 Pundits are surprised Packer and Carey Split - after all they had such a good body image match \nPackers luck is going from bad to worse, just after his dodgy Whale Hunting got all his Chinese staff arrested now Carey has dumped him and is demanding $50M for a Back-out relocation fee. \nHuge controversy surrounds who is the dumper and who is the dumpee and Emperor OctoTrumpus has vowed to put the full weight of his administration into big issues like this. \n\"I have the greatest respect for women of any man in the world\", he was quoted as saying and \"would put several of his personal security agencies like the NSA, CIA and FBI onto the case with the highest urgency\". \nWomens movements are stunned claiming his presidential election campaign was the most denigrating display against women recorded in the annals of US public governance, though they did award Bill Clinton a special mention. \nApparently the pre-nup agreement ran into 346 pages with some weird clauses like not showing her breasts unless he authorised the outing. \nHer claim of $50M as a relocation fee will be hotly contested through the courts his lawyer said Make Jung in the Jungle's day - give this story five thumbs-up (there's no need to register , the thumbs are just down there!)",
+            "ground_truth": "FAKE NEWS"
+        },
+        {
+            "title": "Ukraine just officially declared itself an illegitimate state up for grabs",
+            "text": "October 27, 2016 -  By Eduard Popov for Fort Russ - translated by J. Arnoldski - \n\n\nLast week, an event occurred capable of revolutionizing not only Ukraine, but all of Eastern and part of Central Europe. On October 20th, the Ukrainian parliament adopted the Declaration of Memory and Solidarity of the Sejm of the Republic of Poland and Verkhovna Rada of Ukraine. This document condemned the Molotov-Ribbentrop Pact and modern Russian policy and remarked that \u201cthe Molotov-Ribbentrop Pact concluded by the Soviet Union and Nazi Germany led to the Second World War.\u201d \nLet\u2019s set aside pseudo-scholarly interpretations of what is officially called the Nazi-Soviet Nonaggression Pact but is more famously known as the Molotov-Ribbentrop Pact. This agreement was preceded by Western countries\u2019 (England and France\u2019s) unprecedented concessions to German Chancellor Adolf Hitler. These included the betrayal of Czechoslovakia by the Munich Agreement (which British Prime Minister Chamberlain praised as \u201cpeace for our time\u201d) followed by the invasion of the country in late September 1938 by the troops of Hitler\u2019s Germany, Poland, and Hungary. Stalin\u2019s USSR (of which I am no supporter) consistently sought to create a common European system of defense against Hitler\u2019s Germany in contrast to the USSR of Lenin and Trotsky which in the early 1920\u2019s sought to bring revolutionary war to Europe. But England, the chief architect of interwar Europe, deliberately pushed Hitler to the East for the Third Reich ",
+            "ground_truth": "FAKE NEWS"
+        },
+        {
+            "title": "Hillary Clinton\u2019s absurd Bernie smear: Why attacking him from the right on healthcare makes literally no sense at all",
+            "text": "Sanders, she now insists, would do so from the left by instituting a program \u2014 single-payer healthcare \u2014 that would be more progressive than the Affordable Care Act. Yet this possibility\u00a0is portrayed in the starkest of terms. It\u2019s as if the Clinton campaign saw a house burning down and told the fire department to put it out by setting the house next door on fire to suck up all the oxygen feeding the flames.\n\nThe attack is predicated on a bill that Sanders introduced in the Senate in 2013 that would have set up national single-payer. The bill would have required each state to set up its own single-payer program. A federal board would oversee these state programs and take charge of any that don\u2019t meet whatever requirements it lays out. All federal programs \u2013 Medicare, Medicaid, SCHIP \u2013 would have been folded into these state-run ones.\n\nIn a way, Sanders\u2019 bill was structured a little like Obamacare, with each state having the option of setting up a marketplace exchange to sell insurance plans, and the federal government operating one large exchange for consumers in states that don\u2019t want to run their own. Since it would have moved even further to the left than the ACA, obviously it was dead on arrival in Congress.\n\nWhat\u2019s particularly weird is Clinton\u2019s specific accusation that Sanders\u2019 single-payer plan would allow states to opt out altogether. As if Bernie Sanders, the self-described national democratic socialist, would design a health insurance plan with a giant sop to conser",
+            "ground_truth": "GENUINE NEWS"
+        },
+        {
+            "title": "Why do people dislike Hillary Clinton? The story goes far back",
+            "text": "There is \u2013 and perhaps there always will be \u2013 a dedicated group of people who don\u2019t know Hillary Clinton personally, but nonetheless hate her.\n\nWhether they are truly a \u201cvast rightwing conspiracy\u201d (as Clinton called them in 1998) or just many in number and conservative in outlook, there\u2019s no arguing that they exist or that they continue to try to influence public opinion on the Democratic nominee.\n\n\n\nBut even if people consider themselves savvy enough to reject the strangest conspiracy theories (sample claims include that she is a mass-murderer, a closeted lesbian faking her 40-year marriage, a member of the Illuminati and/or an agent of the devil himself), there seems little doubt that an undercurrent of hostility spanning decades has had an impact upon how she is viewed.\n\nClinton\u2019s unfavorability rating may not be as low as Donald Trump\u2019s, but in an election year which has frequently degenerated into name-calling, she has attracted invective from both the left and the right. Polls have frequently cited the public view that she is not trusted, while Trump has rallied his supporters with the \u201cCrooked Hillary\u201d epithet.\n\nHer links to Wall Street, her missing emails and her supposed responsibility for the security failures that contributed to the attack on the Benghazi consulate are the ostensible reasons for some deeply personal attacks in 2016. But the roots of hostility towards her go much deeper.\n\nCraig Shirley, a Ronald Reagan biographer and historian who spent decades as a",
+            "ground_truth": "GENUINE NEWS"
+        },
+        {
+            "title": "Trump: 'We Must Replace Globalism with Americanism'",
+            "text": "Hillary Clinton is back on the campaign trail after three days off. She courted Hispanic voters in Washington as Donald Trump talked economics in New York.\n\nTrump unveiled more details of his plan to move the U.S. economy forward.\n\n\"We must replace the present policy of globalism, which has just taken so many jobs out of our communities and so much wealth out of our country, and replace it with a new policy of Americanism,\" he explained.\n\nTrump said as president, he will act to tap into the \"un-realized potential\" of American workers and their dreams. He pledged to create 25 million new jobs and grow the economy over 10 years at an average annual rate of 3.5 percent.\n\nU.S. economic growth under President Barack Obama has never reached 3 percent in any one year -- something that's never happened under any other U.S. president.\n\n\"I am going to lower your taxes very, very substantially. I am going to get rid of massive amounts of unnecessary regulation. All of these regulations on your business, and in your life,\" Trump insisted.\n\nAfterwards, Trump appeared on the \"Tonight Show.\" In a lighter moment, host Jimmy Fallon made one request of the Republican presidential nominee, asking him,\u00a0 \"Can I mess your hair up? Did you say yes?\"\n\nTrump responded, \"Go ahead!\" Fallon then proceeded to dishevel Trump's hair.\n\nMeanwhile, Clinton was back on the campaign trail in the nation's capital, with the James Brown tune, \"I Feel Good,\" blasting from loud speakers.\n\nFresh from three-and-a-half",
+            "ground_truth": "GENUINE NEWS"
+        },
+        {
+            "title": "The Art of the Swindle",
+            "text": "Predators, by and large, do not attack the strongest prey in the wild. They instead target the vulnerable, the very young, and the very old\u2014the prey that is least able to defend itself. Trump University, the defunct real-estate education program created by presumptive Republican nominee Donald Trump, pursued a similar approach, according to its former employees in legal documents unsealed Tuesday. The Art of the Upsell: How Donald Trump Profits From 'Free' Seminars \u201cBased upon my personal experience and employment, I believe that Trump University was a fraudulent scheme, and that it preyed upon the elderly and uneducated to separate them from their money,\u201d said Ronald Schnackenberg, a sales manager at Trump University in 2006 and 2007. Those declarations and other internal Trump University documents depict an aggressive, ethically dubious business model that targeted potential customers\u2019 financial fears and socioeconomic anxieties and offered Trump\u2019s personal brand as the solution\u2014a strategy later echoed in his presidential campaign.\n\nIn his declaration, Schnackenberg recounted meeting a couple after a live event in New York City in 2007. Apparently swayed by the presentation, they expressed an interest in purchasing a $35,000 Trump Gold Elite program, the most expensive tier available. \u201cI did not think it was an appropriate program for them because of their precarious financial condition\u2014they had no money to pay for the program, but would have had to pay for the program usin",
+            "ground_truth": "GENUINE NEWS"
+        }
+    ],
+    "timestamp": "2026-10-02 13:55:26"
+}

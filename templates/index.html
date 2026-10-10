@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection & Linguistic Analysis System</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="app-header">
+        <div class="container header-container">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>VERITAS ML</h1>
+                    <p class="subtitle">Fake News Detection & Linguistic Analysis Pipeline</p>
+                </div>
+            </div>
+            <div class="header-tags">
+                <span class="badge badge-info">NLP • TF-IDF</span>
+                <span class="badge badge-purple">SVM • Random Forest • XGBoost</span>
+                <span class="badge badge-accent">Best Model: <strong>{{ best_model }}</strong></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- SECTION: ARTICLE INPUT & CLASSIFIER WORKSPACE -->
+        <section class="section classifier-section">
+            <div class="section-title-wrap">
+                <div>
+                    <h2 class="section-title">Live Article Classifier & Linguistic Inspector</h2>
+                    <p class="section-desc">Paste any news article or select a pre-loaded benchmark sample to predict legitimacy and analyze textual style.</p>
+                </div>
+                <!-- Sample Loaders -->
+                <div class="sample-actions">
+                    <span class="sample-label">Quick Samples:</span>
+                    <button class="btn btn-sample" id="btnSampleFake1">🚨 Fake: Conspiracy</button>
+                    <button class="btn btn-sample" id="btnSampleFake2">🚨 Fake: Clickbait</button>
+                    <button class="btn btn-sample" id="btnSampleReal1">📰 Genuine: Reuters</button>
+                    <button class="btn btn-sample" id="btnSampleReal2">📰 Genuine: AP Policy</button>
+                </div>
+            </div>
+
+            <div class="input-panel panel">
+                <form id="predictionForm">
+                    <div class="form-row">
+                        <div class="form-group flex-3">
+                            <label for="articleTitle">Article Headline / Title <small class="text-muted">(Optional, enhances context)</small></label>
+                            <input type="text" id="articleTitle" placeholder="e.g. BREAKING: Secret Documents Reveal Groundbreaking Announcement..." autocomplete="off">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="modelSelect">Predictor Model</label>
+                            <select id="modelSelect">
+                                <option value="SVM" selected>SVM (Best Model - 95.13% F1)</option>
+                                <option value="XGBoost">XGBoost (93.12% F1)</option>
+                                <option value="Random Forest">Random Forest (90.97% F1)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="label-with-meta">
+                            <label for="articleText">Article Body Text <span class="required">*</span></label>
+                            <span id="charWordCounter" class="text-muted">0 words • 0 chars</span>
+                        </div>
+                        <textarea id="articleText" rows="7" placeholder="Paste the news story body paragraphs here to analyze its linguistic markers and determine authenticity..." required></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="btnSubmit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            Analyze & Predict Article
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="btnClear">Clear</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PREDICTION VERDICT & LINGUISTIC ANALYSIS RESULTS -->
+        <section class="section results-section" id="resultsSection" style="display: none;">
+            <div class="section-title-wrap">
+                <div>
+                    <h2 class="section-title">Prediction & Linguistic Analysis Report</h2>
+                    <p class="section-desc">Comprehensive breakdown of classification verdict, stylistic cues, and predictive linguistic markers.</p>
+                </div>
+            </div>
+
+            <!-- Verdict Card & Multi-Model Consensus -->
+            <div class="verdict-grid">
+                <!-- Main Verdict -->
+                <div class="verdict-card panel" id="mainVerdictCard">
+                    <div class="verdict-header">
+                        <span class="verdict-badge" id="verdictBadge">ANALYZING...</span>
+                        <span class="model-badge" id="evaluatedModelBadge">Evaluated with SVM</span>
+                    </div>
+
+                    <div class="verdict-confidence-wrap">
+                        <div class="confidence-header">
+                            <span class="confidence-title">Classification Confidence</span>
+                            <span class="confidence-num" id="confidenceValue">--%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="confidenceBar" style="width: 0%;"></div>
+                        </div>
+                        <div class="prob-split">
+                            <span>Fake Probability: <strong id="probFakeVal">--%</strong></span>
+                            <span>Genuine Probability: <strong id="probGenuineVal">--%</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3-Model Consensus Card -->
+                <div class="consensus-card panel">
+                    <div class="panel-header">
+                        <h4>Triple Model Consensus</h4>
+                        <span class="panel-sub">Cross-validation across all 3 trained classifiers</span>
+                    </div>
+                    <div class="consensus-list" id="consensusList">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Linguistic & Textual Characteristics Analysis -->
+            <div class="linguistics-grid">
+                <!-- Column 1: Stylistic & Affective Meters -->
+                <div class="panel ling-panel">
+                    <div class="panel-header">
+                        <h4>Linguistic & Affective Indicators</h4>
+                        <span class="panel-sub">Textual characteristics associated with credibility</span>
+                    </div>
+
+                    <div class="indicator-group">
+                        <div class="indicator-head">
+                            <span>Sensationalism & Clickbait Index</span>
+                            <span class="indicator-score" id="sensationalScore">0 / 100</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill fill-warn" id="sensationalBar" style="width: 0%;"></div>
+                        </div>
+                        <div class="keyword-tags" id="sensationalWordsContainer">
+                            <!-- Sensational keywords chips -->
+                        </div>
+                    </div>
+
+                    <div class="indicator-group">
+                        <div class="indicator-head">
+                            <span>Journalistic Source Attribution</span>
+                            <span class="indicator-score" id="attributionScore">0 / 100</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill fill-success" id="attributionBar" style="width: 0%;"></div>
+                        </div>
+                        <div class="keyword-tags" id="attributionWordsContainer">
+                            <!-- Attribution keywords chips -->
+                        </div>
+                    </div>
+
+                    <div class="stylistic-stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-num" id="statAllCaps">0</span>
+                            <span class="stat-label">ALL-CAPS Words</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-num" id="statExclamations">0</span>
+                            <span class="stat-label">Exclamations (!)</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-num" id="statPronouns">0%</span>
+                            <span class="stat-label">Subjectivity Pronouns</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-num" id="statDiversity">0%</span>
+                            <span class="stat-label">Lexical Diversity (TTR)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Structural Characteristics & Key TF-IDF Signals -->
+                <div class="panel ling-panel">
+                    <div class="panel-header">
+                        <h4>Textual Features & Explainable Signals</h4>
+                        <span class="panel-sub">TF-IDF n-grams and stylistic summary</span>
+                    </div>
+
+                    <!-- Bullet Insights -->
+                    <div class="ling-bullets" id="linguisticBullets">
+                        <!-- Populated dynamically -->
+                    </div>
+
+                    <!-- Salient Predictive Keywords -->
+                    <div class="salient-section">
+                        <h5>Key Predictive N-Grams Detected:</h5>
+                        <p class="text-muted text-xs">Features extracted from article weighted by model coefficients:</p>
+                        <div class="salient-tokens-grid" id="salientTokensGrid">
+                            <!-- Salient tokens chips -->
+                        </div>
+                    </div>
+
+                    <!-- Syntactic Metrics -->
+                    <div class="syntax-bar">
+                        <span>Total Words: <strong id="statWords">0</strong></span>
+                        <span>Sentences: <strong id="statSentences">0</strong></span>
+                        <span>Avg Words / Sentence: <strong id="statAvgSent">0</strong></span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container footer-container">
+            <p>Fake News Detection System • Built with Scikit-Learn, XGBoost, TF-IDF & Flask</p>
+            <p class="footer-meta">Dataset: 6,335 benchmark articles • Stratified 80/20 train/test split</p>
+        </div>
+    </footer>
+
+    <!-- Pass metrics data from Flask to JS -->
+    <script>
+        const BENCHMARK_METRICS = {{ metrics|tojson }};
+        const BEST_MODEL_KEY = "{{ best_model }}";
+    </script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
